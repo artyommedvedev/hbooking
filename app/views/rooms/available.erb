@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Rooms</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Number</th>
+    <th>Type</th>
+    <th>Price</th>
+    <th>Status</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @rooms.each do |room| %>
+      <tr>
+        <td><%= room.number %></td>
+        <td><%= room.type_id %></td>
+        <td><%= room.price %></td>
+        <td><%= room.status %></td>
+        <td><%= link_to 'Show', room %></td>
+        <td><%= link_to 'Edit', edit_room_path(room) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Room', new_room_path %>

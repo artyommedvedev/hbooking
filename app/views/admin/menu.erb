@@ -1,0 +1,12 @@
+<% @page_title = "Admin menu" %>
+
+<div class="menu">
+  <h1>Administration Menu</h1>
+  <ul>
+    <li><%= link_to("Manage Rooms", :controller => 'rooms') %></li>
+    <li><%= link_to("Manage Type of rooms", :controller => 'room_types') %></li>
+    <li><%= link_to("Manage Booking", :controller => 'bookings') %></li>
+    <li><%= link_to("Manage Admins", :action => 'show') %></li>
+    <li><%= link_to("Logout", :action => 'logout') %></li>
+  </ul>
+</div>
