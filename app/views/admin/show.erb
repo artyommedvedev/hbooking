@@ -16,7 +16,7 @@
           <tr>
             <td><%= ad.name %></td>
             <td><%= ad.password_digest%></td>
-            <td><%= link_to 'Delete', ad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%#= link_to 'Delete', admin_path(ad), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
       <% end %>
   </tbody>

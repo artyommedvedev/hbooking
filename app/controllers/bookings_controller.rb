@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show,:ushow, :edit, :update, :destroy]
     # GET /bookings
   # GET /bookings.json
   def index
@@ -27,8 +27,12 @@ class BookingsController < ApplicationController
     else
       redirect_to(:action => 'welcome')
     end
+
   end
 
+    def ushow
+      @rtype = RoomType.all
+    end
    # GET /bookings/new
   def new
     @rtype = RoomType.all

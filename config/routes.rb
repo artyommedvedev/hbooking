@@ -18,13 +18,7 @@ Rails.application.routes.draw do
 
   get 'admin/new' => "admin#new"
   post 'admin/new' => "admin#create"
-  delete 'admin/(:id)' =>"admin#delete"
-
-  #match ':controller(/:action)', :via => [:get, :post]
-  #match ':controller(/:action(/:id))', :via => [:get, :post]
-
-  #get 'bookings/login', :to => "bookings#login"
-  #post 'bookings(/:id)/login', :to => "admin#login"
+  #delete 'admin(/:id)' =>"admin#destroy" //need to fix
 
   resources :bookings
   resources :rooms

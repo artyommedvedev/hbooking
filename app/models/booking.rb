@@ -14,7 +14,7 @@ class Booking < ActiveRecord::Base
 
   def number_must_exist
     names_array = Array.new
-    all_rooms=Room.all
+    all_rooms=Room.free
     names_array = all_rooms.pluck(:number)
     unless names_array.include? self.number
     errors.add(:number, "Must exist")

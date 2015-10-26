@@ -1,4 +1,6 @@
 class AdminController < ApplicationController
+  before_action :set_admin, only: [:destroy]
+
     def index
     end
 
@@ -57,4 +59,23 @@ class AdminController < ApplicationController
       redirect_to 'root'
     end
   end
+
+    def destroy
+      if session.has_key?(:name) && session.has_key?(:id)
+        @admin.destroy
+        respond_to do |format|
+          format.html { redirect_to rooms_url, notice: 'Admin was successfully destroyed.' }
+          format.json { head :no_content }
+        end
+      end
+    end
+    #private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_admin
+      @admin = Admin.find(params[:id])
+    end
+
+    def room_params
+      params.require(:admin).permit(:name)
+    end
 end
