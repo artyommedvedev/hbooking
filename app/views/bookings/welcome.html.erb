@@ -1,21 +1,7 @@
-<%= form_for(@booking) do |f| %>
-<% @page_title = "Welcome" %>
+<%= form_tag('/welcome') %>
+<% @page_title = 'Welcome' %>
 <h2> Welcome to room booking system</h2>
-
-    <h3> Set date frames: </h3>
-    <p> From:<%= f.date_select(:begining, order: [:day, :month, :year]) %></p>
-    <p> Until:<%=f.date_select(:ending, order: [:day, :month, :year]) %></p>
-
-    <%=render 'available' %>
-
-    <div class="field">
-      <%= f.label :number %><br>
-      <%= f.number_field :number %>
-    </div>
-
-    <div class="field">
-      <%= f.label :cost %><br>
-      <%= f.number_field :cost %>
-    </div>
-    <%=f.submit %>
-<% end %>
+    <h3> Select date: </h3>
+    <p> From:<%= date_select(:d_st, '' ) %></p>
+    <p> To:<%= date_select(:d_en, '' ) %></p>
+    <%=submit_tag value='Accept date' %>

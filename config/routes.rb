@@ -7,17 +7,18 @@ Rails.application.routes.draw do
   #post 'interaction/create'
 
   root 'bookings#welcome'
-  post 'bookings/welcome' => 'rooms#available'
+  post '/welcome',:to => 'bookings#available'
+  post '/available' => 'bookings#create'
 
-  get 'admin', :to => "admin#login"
-  get 'admin/menu', :to => "admin#menu"
-  get 'admin/login', :to => "admin#login"
-  get 'admin/logout', :to => "admin#logout"
-  get 'admin/show', :to => "admin#show"
-  post 'admin/attempt_login', :to => "admin#attempt_login"
+  get 'admin', :to => 'admin#login'
+  get 'admin/menu', :to => 'admin#menu'
+  get 'admin/login', :to => 'admin#login'
+  get 'admin/logout', :to => 'admin#logout'
+  get 'admin/show', :to => 'admin#show'
+  post 'admin/attempt_login', :to => 'admin#attempt_login'
 
-  get 'admin/new' => "admin#new"
-  post 'admin/new' => "admin#create"
+  get 'admin/new' => 'admin#new'
+  post 'admin/new' => 'admin#create'
   #delete 'admin(/:id)' =>"admin#destroy" //need to fix
 
   resources :bookings

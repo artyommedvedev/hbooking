@@ -13,10 +13,10 @@ class RoomsController < ApplicationController
     end
   end
 
-  def available
-    @rooms = Room.free
-    @is_admin = false
-  end
+  #def available
+   # @rooms = Room.find(allowed_for_booking(@booking[:begining],@booking[:ending]))
+   # @is_admin = false
+  #end
 
   # GET /rooms/1
   # GET /rooms/1.json

@@ -1,21 +1,30 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show,:ushow, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy]
     # GET /bookings
   # GET /bookings.json
   def index
     @rtype = RoomType.all
     if session.has_key?(:name) && session.has_key?(:id)
       @bookings = Booking.all
-      @is_admin = true
     else
       redirect_to(:action => 'welcome')
     end
   end
 
   def welcome
-    @rtype = RoomType.all
     @booking = Booking.new
-    @room = Room.free
+  end
+
+  def available
+    d_st = params[:d_st]
+    @ds = Date.new(d_st['(1i)'].to_i, d_st['(2i)'].to_i, d_st['(3i)'].to_i)
+
+    d_end = params[:d_en]
+    @de = Date.new(d_end['(1i)'].to_i, d_end['(2i)'].to_i, d_end['(3i)'].to_i)
+
+    @bookings = Booking.new
+    @rtypes = RoomType.all
+    @rooms = Room.find(Booking.allowed_for_booking(@ds,@de))
   end
 
   # GET /bookings/1
@@ -30,9 +39,6 @@ class BookingsController < ApplicationController
 
   end
 
-    def ushow
-      @rtype = RoomType.all
-    end
    # GET /bookings/new
   def new
     @rtype = RoomType.all
@@ -55,15 +61,15 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
-    @rtype = RoomType.all
+    @r_type = RoomType.all
     @booking = Booking.new(booking_params)
     if session.has_key?(:name) && session.has_key?(:id)
       respond_to do |format|
         if @booking.save
         @room = Room.all
-        tmp = @booking['number']-1
-        @room[tmp].status = true
-        @room[tmp].save
+      #  tmp = @booking['number']-1
+       # @room[tmp].status = true
+       # @room[tmp].save
           format.html { render :show , notice: 'Booking was successfully created.' }
           format.json { render :show , status: :created, location: @booking }
         else
@@ -76,9 +82,9 @@ class BookingsController < ApplicationController
       respond_to do |format|
         if @booking.save
           @room = Room.all
-          tmp = @booking['number']-1
-          @room[tmp].status = true
-          @room[tmp].save
+        #  tmp = @booking['number']-1
+        #  @room[tmp].status = true
+        #  @room[tmp].save
           @room = Room.free
           format.html { render :welcome, notice: 'Booking was successfully created.' }
           format.json { render :welcome, status: :created, location: @booking }
@@ -116,9 +122,9 @@ class BookingsController < ApplicationController
     if session.has_key?(:name) && session.has_key?(:id)
       @booking.destroy
       @room = Room.all
-      tmp = @booking['number']-1
-      @room[tmp].status = false
-      @room[tmp].save
+     # tmp = @booking['number']-1
+     # @room[tmp].status = false
+     # @room[tmp].save
       respond_to do |format|
         format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
         format.json { head :no_content }
