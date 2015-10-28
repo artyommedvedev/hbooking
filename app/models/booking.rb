@@ -1,18 +1,23 @@
 class Booking < ActiveRecord::Base
   belongs_to :room
+
+  @@rooms = Array.new
+
   validates_presence_of :number
   validates_numericality_of :number
   validates_presence_of :begining
   validates_presence_of :ending
   validates :cost, numericality: { greater_than: 0 }, presence: true
-  #validate :number_must_exist
+  validate :number_must_exist
   validate :dates_correct
 
+
   def number_must_exist
-    unless room_numbers.include? self.number
+    unless @@rooms.include? self.number
     errors.add(:number, 'Must exist')
     end
   end
+
 
   def dates_correct
     if self.begining < Date.today || self.ending < Date.tomorrow || self.begining>self.ending
@@ -81,6 +86,7 @@ class Booking < ActiveRecord::Base
 =end
       end
      #in array room_numbers left only available for booking for selected date
+    @@rooms = room_numbers
     return room_numbers
   end
 end
